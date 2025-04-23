@@ -6,7 +6,7 @@ import GoTo from "@/components/GoTo";
 import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata = {
-  title: "Expenny · The Subscription Tracker",
+  title: "Subtracks · The Subscription Tracker",
   description: "Track all your subscription analytics!",
 };
 
@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <header>
       <div>
         <Link href={'/'}>
-          <h1 className="text-gradient">Expenny</h1>
+          <h1 className="text-gradient">Subtracks</h1>
         </Link>
         <p>The Subscription Tracker</p>
       </div>
