@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
       <div className="footer-content">
         <div>
           <div>
-            <h4>Expenny</h4>
+            <h4>Subtracks</h4>
             <p>|</p>
             <button disabled>Install app</button>
           </div>
