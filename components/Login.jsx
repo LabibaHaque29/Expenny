@@ -45,8 +45,8 @@ export default function Login() {
                     <p>❌ {error}</p>
                 </div>
             )}
-            <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" />
-            <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" type="password" />
+            <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" name="email" autoComplete={"on"}/>
+            <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" type="password"/>
             <button onClick={handleAuthenticate} disabled={authenticating}>{authenticating ? 'Submitting...' : 'Submit'}</button>
             <div className="full-line" />
             <div>
