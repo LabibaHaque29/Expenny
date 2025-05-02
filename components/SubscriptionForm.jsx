@@ -5,20 +5,30 @@ import { useState } from "react"
 
 export default function SubscriptionForm(props) {
     const { onSubmit, closeInput, formData, handleChangeInput, handleResetForm } = props
-    const { handleAddSubscription } = useAuth()
+    // const { handleAddSubscription } = useAuth()
+    const { handleAddSubscription, handleUpdateSubscription } = useAuth()
+
+    
 
 
     function handleFormSumbit(e) {
-        e.preventDefault() // prevents the random as behavior of reloading the webpage
-        handleAddSubscription(formData)
+        e.preventDefault()
+            
+        if (props.editIndex !== null) {
+            // Use the update function from context
+            handleUpdateSubscription(props.editIndex, formData)
+        } else {
+            // For adding new
+            handleAddSubscription(formData)
+        }
+            
         handleResetForm()
         closeInput()
     }
 
-
     return (
         <section>
-            <h2>Add a new subscription</h2>
+            <h2>{props.editIndex !== null ? "Edit subscription" : "Add a new subscription"}</h2>
 
             <form onSubmit={handleFormSumbit}>
                 <label>
@@ -104,7 +114,7 @@ export default function SubscriptionForm(props) {
                 <div className="fat-column form-submit-btns">
                     <button onClick={closeInput}>Cancel</button>
                     <button type="submit" id="subscription-cancel">
-                        Add Subscription
+                        {props.editIndex !== null ? "Update Subscription" : "Add Subscription"}
                     </button>
                 </div>
             </form>

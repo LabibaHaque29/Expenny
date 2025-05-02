@@ -66,6 +66,18 @@ export function AuthProvider(props) {
         await saveToFirebase(newSubscriptions)
     }
 
+    async function handleUpdateSubscription(index, updatedSubscription) {
+  // Create a new array with the updated subscription
+  const newSubscriptions = [...userData.subscriptions];
+  newSubscriptions[index] = updatedSubscription;
+  
+  // Update the state
+  setUserData({ subscriptions: newSubscriptions });
+  
+  // Save to Firebase
+  await saveToFirebase(newSubscriptions);
+}
+
 
 
     useEffect(() => {
@@ -98,7 +110,7 @@ export function AuthProvider(props) {
 }, [])
 
     const value = {
-        currentUser, userData, loading, signup, login, logout, handleAddSubscription, handleDeleteSubscription
+        currentUser, userData, loading, signup, login, logout, handleAddSubscription, handleUpdateSubscription, handleDeleteSubscription
     }
 
     return (

@@ -24,11 +24,11 @@ const blankSubscription = {
 export default function DashboardPage() {
 
     const [isAddEntry, setIsAddEntry] = useState(false)
-
     const [formData, setFormData] = useState(blankSubscription)
-
     const { handleDeleteSubscription, userData, currentUser, loading } = useAuth()
     const isAuthenticated = !!currentUser
+    const [editIndex, setEditIndex] = useState(null);
+
 
     console.log("Auth state:", { currentUser, loading, userData });
 
@@ -40,12 +40,14 @@ export default function DashboardPage() {
         setFormData(newData)
     }
 
+
     function handleEditSubscription(index) {
         const data = userData.subscriptions.find((val, valIndex) => {
             return valIndex === index
         })
         setFormData(data)
-        handleDeleteSubscription(index)
+        // Remove this line: handleDeleteSubscription(index)
+        setEditIndex(index)
         setIsAddEntry(true)
     }
 
@@ -55,6 +57,9 @@ export default function DashboardPage() {
 
     function handleToggleInput() {
         setIsAddEntry(!isAddEntry)
+        if (isAddEntry) {
+            setEditIndex(null) // Reset editIndex when closing the form
+        }
     }
 
     if (loading) {
@@ -76,7 +81,13 @@ export default function DashboardPage() {
             <SubscriptionSummary />
             <SubscriptionsDisplay handleEditSubscription={handleEditSubscription} handleShowInput={isAddEntry ? () => { } : handleToggleInput} />
             {isAddEntry && (
-                <SubscriptionForm handleResetForm={handleResetForm} closeInput={handleToggleInput} formData={formData} handleChangeInput={handleChangeInput} />
+                <SubscriptionForm 
+                handleResetForm={handleResetForm} 
+                closeInput={handleToggleInput} 
+                formData={formData} 
+                handleChangeInput={handleChangeInput}
+                editIndex={editIndex} // Add this prop
+                />
             )}
         </>
     );
