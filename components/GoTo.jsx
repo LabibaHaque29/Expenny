@@ -24,7 +24,13 @@ export default function GoTo() {
                 </>
             )}
             {(isAuthenticated && path == '/dashboard') && (
-                <button onClick={logout}>Logout</button>
+                <div className="flex items-center gap-5">
+                    <span className="text-gray-500 text-sm">
+                        {currentUser.email}
+                    </span>
+                    <div className="h-6 w-px bg-gray-300"></div>
+                    <button onClick={logout}>Logout</button>
+                </div>
             )}
         </div>
     )
