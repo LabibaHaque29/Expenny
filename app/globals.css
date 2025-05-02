@@ -182,7 +182,26 @@ section>h2 {
   position: relative;
   overflow: hidden;
   transition-duration: 200ms;
+  padding-bottom: 60px; /*Add padding*/
+  min-height: 300px;
 }
+
+.notes-container {
+  display: block;
+  max-height: 80px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding-bottom: 50px;
+  /* Add significant padding at the bottom */
+  word-wrap: break-word;
+  /* Ensure text wraps */
+}
+
+.subscription-card p {
+  margin-bottom: 5px;
+  word-wrap: break-word;
+}
+
 
 .subscription-card>div:first-of-type {
   display: flex;
@@ -238,6 +257,7 @@ section>h2 {
   justify-content: space-between;
   gap: 1rem;
   background: white;
+  height: 60px;
 }
 
 .subscription-actions button {

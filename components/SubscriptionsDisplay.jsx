@@ -46,7 +46,9 @@ export default function SubscriptionsDisplay(props) {
                             </div>
 
                             <div className="white-line" />
-                            <p>{notes}</p>
+                            <div className="notes-container">
+                                <p>{notes}</p>
+                            </div>
                             <div className="subscription-actions">
                                 <button onClick={() => {
                                     handleEditSubscription(subIndex)
@@ -62,6 +64,7 @@ export default function SubscriptionsDisplay(props) {
                                 </button>
                             </div>
                         </div>
+                        
                     )
                 })}
                 <button onClick={handleShowInput} className="button-card add-subscriptions">
