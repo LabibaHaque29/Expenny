@@ -95,16 +95,7 @@ export default function DashboardPage() {
                 {isModalOpen && (
                     <div className="modal-overlay">
                         <div className="modal-content">
-                        <button 
-                            className="modal-close-btn" 
-                            onClick={() => {
-                            setIsModalOpen(false);
-                            setEditIndex(null);
-                            setFormData(blankSubscription);
-                            }}
-                        >
-                            ×
-                        </button>
+                        
                         <SubscriptionForm
                             handleResetForm={handleResetForm}
                             closeInput={() => {
