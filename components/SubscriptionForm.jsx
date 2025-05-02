@@ -112,8 +112,8 @@ export default function SubscriptionForm(props) {
                 </label>
 
                 <div className="fat-column form-submit-btns">
-                    <button onClick={closeInput}>Cancel</button>
-                    <button type="submit" id="subscription-cancel">
+                    <button type="button" onClick={closeInput}>Cancel</button>
+                    <button type="submit">
                         {props.editIndex !== null ? "Update Subscription" : "Add Subscription"}
                     </button>
                 </div>

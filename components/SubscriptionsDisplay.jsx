@@ -67,7 +67,11 @@ export default function SubscriptionsDisplay(props) {
                         
                     )
                 })}
-                <button onClick={handleShowInput} className="button-card add-subscriptions">
+                <button onClick={() => {
+                // Reset any edit state before showing the add form
+                props.handleResetEditState && props.handleResetEditState();
+                handleShowInput();
+                }} className="button-card add-subscriptions">
                     <i className="fa-solid fa-plus"></i>
                     <h5>Add new subscription</h5>
                 </button>

@@ -21,6 +21,7 @@ const blankSubscription = {
     status: 'Active'
 }
 
+
 export default function DashboardPage() {
 
     const [isAddEntry, setIsAddEntry] = useState(false)
@@ -29,8 +30,16 @@ export default function DashboardPage() {
     const isAuthenticated = !!currentUser
     const [editIndex, setEditIndex] = useState(null);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     console.log("Auth state:", { currentUser, loading, userData });
+
+
+    function handleResetEditState() {
+        setEditIndex(null);
+        setFormData(blankSubscription);
+    }
 
     function handleChangeInput(e) {
         const newData = {
@@ -48,7 +57,8 @@ export default function DashboardPage() {
         setFormData(data)
         // Remove this line: handleDeleteSubscription(index)
         setEditIndex(index)
-        setIsAddEntry(true)
+        setIsModalOpen(true)
+
     }
 
     function handleResetForm() {
@@ -56,10 +66,8 @@ export default function DashboardPage() {
     }
 
     function handleToggleInput() {
-        setIsAddEntry(!isAddEntry)
-        if (isAddEntry) {
-            setEditIndex(null) // Reset editIndex when closing the form
-        }
+        handleResetEditState()
+        setIsModalOpen(true)
     }
 
     if (loading) {
@@ -79,16 +87,38 @@ export default function DashboardPage() {
     return (
         <>
             <SubscriptionSummary />
-            <SubscriptionsDisplay handleEditSubscription={handleEditSubscription} handleShowInput={isAddEntry ? () => { } : handleToggleInput} />
-            {isAddEntry && (
-                <SubscriptionForm 
-                handleResetForm={handleResetForm} 
-                closeInput={handleToggleInput} 
-                formData={formData} 
-                handleChangeInput={handleChangeInput}
-                editIndex={editIndex} // Add this prop
-                />
-            )}
+            <SubscriptionsDisplay
+                handleEditSubscription={handleEditSubscription}
+                handleShowInput={handleToggleInput}
+                handleResetEditState={handleResetEditState}
+            />
+                {isModalOpen && (
+                    <div className="modal-overlay">
+                        <div className="modal-content">
+                        <button 
+                            className="modal-close-btn" 
+                            onClick={() => {
+                            setIsModalOpen(false);
+                            setEditIndex(null);
+                            setFormData(blankSubscription);
+                            }}
+                        >
+                            ×
+                        </button>
+                        <SubscriptionForm
+                            handleResetForm={handleResetForm}
+                            closeInput={() => {
+                            setIsModalOpen(false);
+                            setEditIndex(null);
+                            setFormData(blankSubscription);
+                            }}
+                            formData={formData}
+                            handleChangeInput={handleChangeInput}
+                            editIndex={editIndex}
+                        />
+                        </div>
+                    </div>
+                )}
         </>
     );
 }
